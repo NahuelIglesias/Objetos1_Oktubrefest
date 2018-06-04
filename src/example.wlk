@@ -2,12 +2,17 @@ class Carpa {
 	const capacidad //numero personas
 	const tieneMusica //booleano
 	const jarras //CONJUNTO de jarras de igual marca
+	var genteAdentro //LISTA de personas
 	
 	method marca() {
 		return jarras.first({jarra => jarra.marca()})
 	}
 	method tieneMusica() = tieneMusica
 	method capacidad() = capacidad
+	
+	method permiteIngresoA(personaX) {
+		return genteAdentro+1 <= capacidad and !personaX.estaEbria()
+	}
 }
 
 
@@ -28,7 +33,7 @@ class Persona {
 		return jarrasDeCerveza.sum({jarra => jarra.cantidadAlcoholAportado()})
 	}
 	
-	method estaEbrio() {
+	method estaEbria() {
 		return self.litrosDeAlcoholIngeridos()*peso > aguante
 	}
 	
@@ -60,7 +65,7 @@ class Aleman inherits Persona {
 	}
 	
 	override method quiereEntrarACarpa(carpaX) {
-		return super(carpaX) and (carpaX.capacidad().mod(2) == 0)
+		return super(carpaX) and (carpaX.capacidad() % 2 == 0)
 	}
 }
 
