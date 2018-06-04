@@ -1,0 +1,15 @@
+import example.*
+
+describe "tests de oktubrefest" {
+	var hofbrau
+	var jarra1
+	
+	fixture {
+		hofbrau = new Rubia(lupulo=5, pais="alemania", graduacion=0.08)
+		jarra1 = new Jarra(litros=0.5, marca=hofbrau)
+	}
+	
+	test "una jarra aporta x litros" {
+		assert.equals(0.04, jarra1.cantidadAlcoholAportado())
+	}
+}
