@@ -11,7 +11,11 @@ class Carpa {
 	method capacidad() = capacidad
 	
 	method permiteIngresoA(personaX) {
-		return genteAdentro+1 <= capacidad and !personaX.estaEbria()
+		return genteAdentro.size()+1 <= capacidad and !personaX.estaEbria()
+	}
+	
+	method entra(personaX) {
+		genteAdentro.add(personaX)
 	}
 }
 
@@ -48,6 +52,14 @@ class Persona {
 	
 	method puedeEntrarA(carpaX) {
 		return self.quiereEntrarACarpa(carpaX) and carpaX.permiteIngresoA(self)
+	}
+	
+	method entrarA(carpaX) {
+		if (self.puedeEntrarA(carpaX)) {
+			carpaX.entra(self)
+		} else {
+			self.error("No se cumplen las condiciones necesarias para permitir ingreso")
+		}
 	}
 }
 
