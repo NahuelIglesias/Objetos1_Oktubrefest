@@ -45,6 +45,10 @@ class Persona {
 	method coincideMusica(carpaX) {
 		return (leGustaLaMusicaTradicional == carpaX.tieneMusica())
 	}
+	
+	method puedeEntrarA(carpaX) {
+		return self.quiereEntrarACarpa(carpaX) and carpaX.permiteIngresoA(self)
+	}
 }
 
 class Belga inherits Persona {
