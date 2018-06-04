@@ -1,4 +1,19 @@
-class Persona{
+class Carpa {
+	const capacidad //numero personas
+	const tieneMusica //booleano
+	const jarras //CONJUNTO de jarras de igual marca
+	
+	method marca() {
+		return jarras.first({jarra => jarra.marca()})
+	}
+	method tieneMusica() = tieneMusica
+	method capacidad() = capacidad
+}
+
+
+//------Personas------
+
+class Persona {
 	const peso //numero
 	const leGustaLaMusicaTradicional //booleano
 	const aguante //numero
@@ -18,6 +33,35 @@ class Persona{
 	}
 	
 	
+	method quiereEntrarACarpa(carpaX) {
+		return self.leGustaMarca(carpaX.marca()) and self.coincideMusica(carpaX)
+	}
+	method leGustaMarca(marcaX)
+	method coincideMusica(carpaX) {
+		return (leGustaLaMusicaTradicional == carpaX.tieneMusica())
+	}
+}
+
+class Belga inherits Persona {
+	override method leGustaMarca(marcaX) {
+		return marcaX.lupulo() > 4
+	}
+}
+
+class Checos inherits Persona {
+	override method leGustaMarca(marcaX) {
+		return marcaX.graduacion() > 0.08
+	}
+}
+
+class Aleman inherits Persona {
+	override method leGustaMarca(marcaX) {
+		return true
+	}
+	
+	override method quiereEntrarACarpa(carpaX) {
+		return super(carpaX) and (carpaX.capacidad().mod(2) == 0)
+	}
 }
 
 
@@ -47,10 +91,13 @@ class Marca {
 	method pais() = pais
 	
 	method alcoholPorLitros(litros)
+	method graduacion()
 }
 
 class Rubia inherits Marca {
 	const graduacion //porcentaje de graduacion (numero)
+	
+	override method graduacion() = graduacion
 	
 	override method alcoholPorLitros(litros) {
 		return graduacion*litros
@@ -58,8 +105,10 @@ class Rubia inherits Marca {
 }
 
 class Negra inherits Marca {
+	override method graduacion() = reglasMundiales.graduacion()
+	
 	override method alcoholPorLitros(litros) {
-		return #{lupulo, reglasMundiales.graduacion()}.min()
+		return #{lupulo, self.graduacion()}.min()
 	}
 }
 
