@@ -1,3 +1,22 @@
+class Persona{
+	const peso //numero
+	const leGustaLaMusicaTradicional //booleano
+	const aguante //numero
+	var jarrasDeCerveza //LISTA de jarras
+	var marcasQueLeGustan //CONJUNTO de marcas
+	
+	method comprarCerveza(jarra) {
+		jarrasDeCerveza.add(jarra)
+	}
+	
+	method litrosDeAlcoholIngeridos() {
+		return jarrasDeCerveza.sum({jarra => jarra.cantidadAlcoholAportado()})
+	}
+}
+
+
+//------Jarras------
+
 class Jarra {
 	const litros //cantidad litros (numero)
 	const marca //instancia de clase marca o sus herencias
