@@ -12,6 +12,12 @@ class Persona{
 	method litrosDeAlcoholIngeridos() {
 		return jarrasDeCerveza.sum({jarra => jarra.cantidadAlcoholAportado()})
 	}
+	
+	method estaEbrio() {
+		return self.litrosDeAlcoholIngeridos()*peso > aguante
+	}
+	
+	
 }
 
 
